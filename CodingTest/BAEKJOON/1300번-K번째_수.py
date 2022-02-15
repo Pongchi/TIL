@@ -3,7 +3,18 @@
 N = int(input())
 k = int(input())
 
-i = k // N
-j = k % N
+Start = 1
+End = N * N
+while Start <= End:
+    mid = (Start + End) // 2
+    tmp = 0
+    for row in range(1, N+1):
+        tmp += min(mid//row, N)
 
-print( (i+1) * (j+1) )
+    if tmp >= k:
+        result = mid
+        End = mid - 1
+    else:
+        Start = mid + 1
+
+print( result )
