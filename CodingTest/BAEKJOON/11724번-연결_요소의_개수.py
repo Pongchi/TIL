@@ -3,10 +3,11 @@
 import sys
 from collections import deque
 
-N, M = map(int ,sys.stdin.readline().split())
+N, M = map(int, sys.stdin.readline().split())
 visited = set()
 answer = 0
-Graph = { i:set() for i in range(1, N+1) }
+Graph = {i: set() for i in range(1, N+1)}
+
 
 def dfs(root):
     queue = deque([root])
@@ -16,6 +17,7 @@ def dfs(root):
         if n not in visited:
             visited.add(n)
             queue += list(Graph[n] - visited)
+
 
 for m in range(M):
     a, b = map(int, sys.stdin.readline().split())
@@ -32,4 +34,4 @@ for root in Graph:
         else:
             break
 
-print( answer )
+print(answer)
