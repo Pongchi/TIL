@@ -5,6 +5,9 @@ import sys
 SET = set()
 for _ in range(int(sys.stdin.readline())):
     cmd = sys.stdin.readline().split()
+    if len(cmd) == 2:
+        cmd[1] = int(cmd[1])
+        
     if cmd[0] == "add":
         SET.add(cmd[1])
     
