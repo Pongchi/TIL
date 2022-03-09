@@ -1,19 +1,14 @@
 # 문제 주소 : https://www.acmicpc.net/problem/2480
 
-dice = dict()
-for i in input().split():
-    i = int(i)
-    if i not in dice:
-        dice[i] = 0
-    dice[i] += 1
+a, b, c = map(int, input().split())
+if a == b == c:
+    print( 10000 + a * 1000)
 
-for k in dice:
-    if dice[k] == 3:
-        print(10000 + k * 1000 )
-        exit()
+elif a == b or a == c:
+    print( 1000 + a * 100)
 
-    elif dice[k] == 2:
-        print(1000 + k * 100)
-        exit()
+elif b == c:
+    print( 1000 + b * 100)
 
-print( max(dice.keys()) * 100 )
+else:
+    print( max(a, b, c) * 100 )
