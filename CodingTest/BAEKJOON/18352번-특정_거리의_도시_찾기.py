@@ -17,8 +17,11 @@ queue = deque([X])
 
 while queue:
     n = queue.popleft()
-    
+
     for i in graph[n]:
+        if i == X:
+            continue
+    
         if distance[i] == 0 or distance[i] < distance[n]:
             queue.append(i)
             distance[i] = distance[n] + 1
