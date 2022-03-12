@@ -2,14 +2,18 @@
 
 N = int(input())
 
-stair_number = { i:[] for i in range(1, N+1) }
-stair_number[1] = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+dp = [ [0] * 10 for i in range(N+1) ]
+for i in range(1, 10):
+    dp[1][i] = 1
 
 for i in range(2, N+1):
-    for n in stair_number[i-1]:
-        if int(n[-1])-1 >= 0:
-            stair_number[i].append(n+str(int(n)-1))
-        if int(n[-1])+1 <= 9:
-            stair_number[i].append(n+str(int(n)+1))
+    for j in range(10):
+        if j == 0:
+            dp[i][j] = dp[i-1][1]
+        elif j == 9:
+            dp[i][j] = dp[i-1][8]
+        else:
+            dp[i][j] = dp[i-1][j-1] + dp[i-1][j+1]
 
-print(len(stair_number[N]))
+print(sum(dp[N]) % 1000000000)
+print(dp)
