@@ -13,18 +13,18 @@ for m in range(M):
 
 ####################################################
 
-queue = deque([X])
+queue = deque([(X, 0)])
 
 while queue:
-    n = queue.popleft()
+    origin, dst = queue.popleft()
 
-    for i in graph[n]:
-        if i == X:
+    for destination in graph[origin]:
+        if destination == X:
             continue
     
-        if distance[i] == 0 or distance[i] < distance[n]:
-            queue.append(i)
-            distance[i] = distance[n] + 1
+        if distance[destination] == 0 or dst+1 < distance[destination]:
+            queue.append((destination, dst+1))
+            distance[destination] = dst + 1
 
 
 result = []
