@@ -7,6 +7,7 @@ MAP = [ list(input()) for i in range(N) ]
 dx = [1, -1, 0, 0]
 dy = [0, 0, 1, -1]
 
+print(MAP)
 def bfs(colors):
     area = 0
     for i in range(N):
@@ -25,6 +26,7 @@ def bfs(colors):
                             queue.append((xx, yy))
                             MAP[xx][yy] = colors[color]
 
+    print(MAP)
     return area
 
 print( bfs({'R':'GG', 'G':'GG', 'B':'BB'}), bfs({'GG':'', 'BB':''}))
