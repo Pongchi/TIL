@@ -2,18 +2,11 @@
 
 import heapq
 
-def heap_sort(arr, k):
-    heap = []
-    for i in arr:
-        heapq.heappush(heap, i)
-
-    sorted_nums = []
-    while heap:
-        sorted_nums.append(heapq.heappop(heap))
-    
-    return sorted_nums[k-1]
-
 N, K = map(int, input().split())
 heap = list(map(int, input().split()))
+heapq.heapify(heap)
 
-print(heap_sort(heap, K))
+for n in range(K-1):
+    heapq.heappop(heap)
+
+print( heapq.heappop(heap) )
