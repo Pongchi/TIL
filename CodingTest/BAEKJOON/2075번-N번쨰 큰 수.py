@@ -4,7 +4,6 @@ import heapq
 
 N = int(input())
 heap = []
-result = 0
 
 for n in range(N):
     for i in map(int, input().split()):
