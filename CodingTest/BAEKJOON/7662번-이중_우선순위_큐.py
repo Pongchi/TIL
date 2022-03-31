@@ -1,38 +1,41 @@
 # 문제 주소 : https://www.acmicpc.net/problem/7662
 
-import sys
+import sys, heapq
 
 for T in range(int(sys.stdin.readline())):
     print("========================")
-    queue = []
+    max_heap = []
+    min_heap = []
     for k in range(int(sys.stdin.readline())):
         cmd, value = sys.stdin.readline().split()
         value = int(value)
 
         if cmd == "I":
-            queue.append(value)
-    
+            heapq.heappush(max_heap, -value)
+            heapq.heappush(min_heap, value)
+        
         else:
-            if queue:
-                idx = 0
+            if max_heap and min_heap:
+                tmp = []
                 if value == 1:
-                    for i in range(len(queue)):
-                        if queue[idx] < queue[i]:
-                            idx = i
+                    n = heapq.heappop(max_heap)
+                    while (min_heap):
+                        tmp.append(heapq.heappop(min_heap))
+                        if tmp[-1] == n:
+                            for i in tmp[:-1]:
+                                heapq.heappush(min_heap, i)
+                            break
                 else:
-                    for i in range(len(queue)):
-                        if queue[idx] > queue[i]:
-                            idx = i
-                queue.pop(idx)
-    
-    _max, _min = 0, 1000001
-    for i in range(len(queue)):
-        if queue[i] < _min:
-            _min = queue[i]
-        if queue[i] > _max:
-            _max = queue[i]
+                    n = heapq.heappop(min_heap)
+                    while (max_heap):
+                        tmp.append(heapq.heappop(max_heap))
+                        if tmp[-1] == n:
+                            for i in tmp[:-1]:
+                                heapq.heappush(max_heap, i)
+                            break    
+  
+    if max_heap:
+        print(-heapq.heappop(max_heap), heapq.heappop(min_heap))
 
-    if queue:
-        print(_max, _min)
     else:
         print("EMPTY")
