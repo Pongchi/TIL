@@ -14,9 +14,8 @@ for T in range(int(sys.stdin.readline())):
         else:
             if heap:
                 if value == 1:
-                    n = max(heap)
-                    heap.remove(n)
+                    heap.remove(heapq.nlargest(1, heap)[0])
                 else:
-                    n = heapq.heappop(heap)
+                    heapq.heappop(heap)
 
     print(" ".join(map(str, (max(heap), heapq.heappop(heap)))) if heap else "EMPTY")
