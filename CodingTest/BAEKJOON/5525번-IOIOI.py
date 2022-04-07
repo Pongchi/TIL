@@ -6,11 +6,13 @@ idx = 0
 result = 0
 
 while idx < M:
-    if S[idx] == 'I' and S[idx:idx+len(Pn)] == Pn:
-        result += 1
-        idx += 2
+    if S[idx] == 'I':
+        PN = 0
+        while idx < M and S[idx:idx+len(Pn)] == Pn:
+            PN += 1
+            idx += 2
+        result += PN
 
-    else:
-        idx += 1
+    idx += 1
 
 print(result)
