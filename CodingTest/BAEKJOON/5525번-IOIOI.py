@@ -12,7 +12,7 @@ while idx < M:
             PN += 1
             idx += 2
 
-        result += PN - (PN % N != 0) if PN >= N else 0
+        result += PN - N + 1 if PN >= N else 0
 
     else:
         idx += 1
