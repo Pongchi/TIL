@@ -1,4 +1,5 @@
 # 문제 주소 : https://www.acmicpc.net/problem/11051
+
 def binomial_coefficient(n, k):
     dp = [ [0]*(k+1) for i in range(n+1) ]
 
