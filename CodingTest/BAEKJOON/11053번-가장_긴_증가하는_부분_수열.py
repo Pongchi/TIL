@@ -3,22 +3,15 @@
 N = int(input())
 A = list(map(int, input().split()))
 
-def LIS():
-    Di = [0]
-    X = [0]
-    D = [0]
+dp = [A[0]]
+for i in range(1, N):
+    if dp[-1] < A[i]:
+        dp.append(A[i])
+    
+    else:
+        for j in range(len(dp)):
+            if dp[j] >= A[i]:
+                dp[j] = A[i]
+                break
 
-    for i in range(N):
-        if X[-1] < A[i]:
-            X.append(A[i])
-            Di.append(D[-1]+1)
-
-        else:
-            for j in range(len(Di)):
-                if Di[j] < A[i]:
-                    X[j-1] = A[i]
-                    break 
-
-    return len(Di)
-
-print( LIS() - 1)
+print( len(dp) )
