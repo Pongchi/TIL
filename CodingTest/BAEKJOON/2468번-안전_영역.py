@@ -35,6 +35,7 @@ def solution():
             if MAP[i][j] < _min:
                 _min = MAP[i][j]
     
+    # MAIN
     result = 0
     for level in range(_min, _max+1):
         cnt = cntZone(N, [ MAP[i][:] for i in range(N) ], level)
