@@ -3,23 +3,25 @@
 import sys
 from queue import deque
 
-vector_row = [2, 2, 1, 1, -1, -1, -2, -2]
-vector_col = [1, -1, 2, -2, 2, -2, 1, -1]
+vx = [2, 2, 1, 1, -1, -1, -2, -2]
+vy = [1, -1, 2, -2, 2, -2, 1, -1]
 def bfs(L, c, d):
-    queue = deque([c])
-    visited = {c:0}
+    queue = deque([(c[0], c[1], 0)])
+    MAP = [ [1]*L for i in range(L) ]
+    MAP[c[0]][c[1]] = 0
     
     while queue:
-        l = queue.popleft()
-        cnt = visited[l]
-        if l == d:
+        x, y, cnt = queue.popleft()
+        
+        if x == d[0] and y == d[1]:
             return cnt
-
+        
         for i in range(8):
-            moved_loc = (l[0]+vector_row[i], l[1]+vector_col[i])
-            if all((0 <= moved_loc[0], moved_loc[1] <= L-1)) and moved_loc not in visited:
-                visited[moved_loc] = cnt+1
-                queue.append(moved_loc)
+            nx = x+vx[i]
+            ny = y+vy[i]
+            if 0 <= nx < L and 0 <= ny < L and MAP[nx][ny]:
+                queue.append([nx, ny, cnt+1])
+                MAP[nx][ny] = 0
 
 for T in range(int(sys.stdin.readline())):
     L = int(sys.stdin.readline())
