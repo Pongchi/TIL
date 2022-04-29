@@ -14,6 +14,10 @@ def backtracking(distance, row, col):
     global answer
     if distance > answer:
         answer = distance
+    
+    if answer == 26:
+        print(26)
+        exit()
         
     for i in range(4):
         nr, nc = row+vr[i], col+vc[i]
