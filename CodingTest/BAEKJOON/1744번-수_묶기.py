@@ -12,7 +12,10 @@ while len(arr) > 1:
             result += a if a else b
             arr.pop(0)
         else:
-            result += a + b
+            if a > 0:
+                result += a + b
+            else:
+                result += a*b
     
     else:
         result += a*b
