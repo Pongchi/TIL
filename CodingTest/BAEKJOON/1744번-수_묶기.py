@@ -18,7 +18,11 @@ while zero:
         break
 
 while len(arr) > 1:
-    a, b = arr.pop(), arr.pop()
+    if arr[-1] > 0:
+        a, b = arr.pop(), arr.pop()
+    else:
+        a, b = arr.pop(0), arr.pop(0)
+
     if not (a == 1 and b == 1) and (a > 0 and b > 0) or (a < 0 and b < 0):
         result += a*b
 
