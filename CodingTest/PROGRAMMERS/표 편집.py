@@ -22,7 +22,7 @@ def solution(n, k, command):
         
         elif cmd[0] == 'C':
             stack.append(arr.pop(k))
-            k += 0 if k < len(arr)-1 else -1
+            k += 0 if k < len(arr) else -1
             
         else:
             history = stack.pop()
