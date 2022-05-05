@@ -2,40 +2,41 @@
 
 def solution(n, k, command):
     stack = []
-    arr = [ 1 for i in range(n) ]
-    def TOP():
-        for i in range(n-1, -1, -1):
-            if arr[i]:
-                return i
-        return 0
+    arr = list(range(n))
+    def undo(number):
+        if arr[-1] < number:
+            arr.append(number)
+        else:
+            for i in range(len(arr)-1, -1, -1):
+                if arr[i] < number:
+                    arr.insert(i+1, number)
+                    return
     
     for cmd in command:
         cmd = cmd.split()
         if cmd[0] == 'U':
-            cnt = int(cmd[1])
-            while cnt:
-                if arr[k-1]:
-                    cnt -= 1
-                k -= 1
+            k -= int(cmd[1])
 
         elif cmd[0] == 'D':
-            cnt = int(cmd[1])
-            while cnt:
-                if arr[k+1]:
-                    cnt -= 1
-                k += 1
+            k += int(cmd[1])
         
         elif cmd[0] == 'C':
-            arr[k] = 0
-            stack.append(k)
-            k += 1 if k < TOP() else -1
+            stack.append(arr.pop(k))
+            k += 0 if k < len(arr)-1 else -1
             
         else:
-            arr[stack.pop()] = 1
+            undo(stack.pop())
     
-    result = ""
-    for value in arr:
-        result += 'O' if value else 'X'
+    result = ''
+    i = 0
+    while i < len(arr):
+        if arr[i] == len(result):
+            result += 'O'
+            i += 1
+        else:
+            result += 'X'
+
     return result
 
 print( solution(8, 2, ["D 2","C","U 3","C","D 4","C","U 2","Z","Z"]) ) # "OOOOXOOO"
+print( solution(8, 2, ["D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C"]) ) # "OOXOXOOO"
