@@ -25,7 +25,10 @@ def solution(n, k, command):
             k += 0 if k < len(arr)-1 else -1
             
         else:
-            undo(stack.pop())
+            history = stack.pop()
+            if history < arr[k]:
+                k += 1
+            undo(history)
     
     result = ''
     i = 0
