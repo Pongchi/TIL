@@ -1,5 +1,6 @@
 import sys
 from math import inf
+
 n, m = map(int, [sys.stdin.readline(), sys.stdin.readline()])
 distance = [[inf] * n for i in range(n)]
 for M in range(m):
