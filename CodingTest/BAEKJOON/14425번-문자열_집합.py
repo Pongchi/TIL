@@ -3,18 +3,14 @@
 import sys
 
 N, M = map(int, sys.stdin.readline().split())
-words = { i:[] for i in "abcdefghijklmnopqrstuvwxyz" }
+words = set()
 result = 0
 
 for n in range(N):
-    s = sys.stdin.readline().rstrip()
-    words[s[0]].append(s)
+    words.add(sys.stdin.readline().rstrip())
 
 for m in range(M):
-    s = sys.stdin.readline().rstrip()
-    for S in words[s[0]]:
-        if s == S:
-            result += 1
-            break
+    if sys.stdin.readline().rstrip() in words:
+        result += 1
 
 print( result )
