@@ -4,12 +4,12 @@ def solution(n, k, command):
     stack = []
     arr = list(range(n))
     def undo(number):
-        if arr[-1] < number:
+        if not arr or arr[-1] < number:
             arr.append(number)
         else:
-            for i in range(len(arr)-1, -1, -1):
-                if arr[i] < number:
-                    arr.insert(i+1, number)
+            for i in range(len(arr)):
+                if arr[i] > number:
+                    arr.insert(i, number)
                     return
     
     for cmd in command:
@@ -22,24 +22,18 @@ def solution(n, k, command):
         
         elif cmd[0] == 'C':
             stack.append(arr.pop(k))
-            k += 0 if k < len(arr) else -1
+            if arr and (stack[-1] > arr[-1]):
+                k -= 1
             
         else:
             history = stack.pop()
-            if history < arr[k]:
+            if arr[k] > history:
                 k += 1
             undo(history)
     
-    result = ''
-    i = 0
-    while i < len(arr):
-        if arr[i] == len(result):
-            result += 'O'
-            i += 1
-        else:
-            result += 'X'
-
-    return result
+    result = [ "O" if i in arr else "X" for i in range(n) ]
+    return "".join(result)
 
 print( solution(8, 2, ["D 2","C","U 3","C","D 4","C","U 2","Z","Z"]) ) # "OOOOXOOO"
 print( solution(8, 2, ["D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C"]) ) # "OOXOXOOO"
+print( solution(8, 0, ["C", "C", "C", "C", "C", "C", "C", "C"]))
