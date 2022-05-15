@@ -1,16 +1,16 @@
 # 문제 주소 : https://www.acmicpc.net/problem/1629
 
 def pow(a, b):
-    if b == 0:
-        return 1
+    result = 1
 
-    elif b % 2 == 0:
-        n = pow(a, b // 2)
-        return n*n
-    
-    else:
-        n = pow(a, (b-1)//2)
-        return a * n * n
+    while b > 0:
+        if b & 1:
+            result *= a
+        
+        a *= a
+        b >>= 1
+
+    return result
 
 A, B, C = map(int, input().split())
 
