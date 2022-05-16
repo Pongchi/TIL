@@ -9,7 +9,7 @@ MAP = [ list(map(int, list(sys.stdin.readline().rstrip()))) for _ in range(N) ]
 vx = [1, -1, 0, 0]
 vy = [0, 0, 1, -1]
 result = []
-def bfs(x, y, d, isBreak):
+def bfs(MAP, x, y, d, isBreak):
     queue = deque([(x, y, d)])
     MAP[x][y] = d
     
@@ -21,20 +21,20 @@ def bfs(x, y, d, isBreak):
 
         for i in range(4):
             nx, ny = x+vx[i], y+vy[i]
-            if 0 <= nx < N and 0 <= ny < M:
+            if 0 <= nx < N and 0 <= ny < M and MAP[nx][ny] != -1:
                 if MAP[nx][ny] == 0:
                     MAP[nx][ny] = d
                     queue.append((nx, ny, d+1))
 
                 elif not isBreak and MAP[nx][ny] == 1:
-                    res = bfs(nx, ny, d+1, True)
-                    MAP[nx][ny] = 1
+                    res = bfs([ MAP[i][:] for i in range(N) ], nx, ny, d+1, True)
+                    MAP[nx][ny] = -1
 
                     if res != -1:
                         result.append( res )
     return -1
 
-res = bfs(0, 0, 1, False)
+res = bfs(MAP, 0, 0, 1, False)
 if res == -1:
     print( min(result) if result else -1)
 
