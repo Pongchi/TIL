@@ -15,9 +15,9 @@ start, end = 0, max(arr)
 while start <= end:
     mid = (start + end) // 2
 
-    if sum_budget(mid) < M:
-        start = mid + 1
-    else:
+    if sum_budget(mid) > M:
         end = mid - 1
+    else:
+        start = mid + 1
 
 print( end )
