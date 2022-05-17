@@ -4,27 +4,28 @@ import sys
 from queue import deque
 
 def D(n):
-    return str((2 * int(n)) % 10000)
+    return (2 * n) % 10000
 
 def S(n):
-    return str(int(n)-1) if int(n) != 0 else '9999'
+    return n-1 if n != 0 else 9999
 
 def L(n):
-    return n[1:] + n[0]
+    n = str(n).zfill(4)
+    return int(n[1:] + n[0])
 
 def R(n):
-    return n[-1] + n[:-1]
+    n = str(n).zfill(4)
+    return int(n[-1] + n[:-1])
 
 T = int(sys.stdin.readline())
 
 for _ in range(T):
-    A, B = sys.stdin.readline().split()
-    B = int(B)
+    A, B = map(int, sys.stdin.readline().split())
     queue = deque([(A, [])])
 
     while queue:
         a, log = queue.popleft()
-        if int(a) == B:
+        if a == B:
             print("".join(log))
             break
         
