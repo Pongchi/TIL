@@ -29,8 +29,12 @@ for _ in range(T):
             print("".join(log))
             break
         
-        queue.append( (D(a), log+['D']) )
-        queue.append( (S(a), log+['S']) )
-        queue.append( (L(a), log+['L']) )
-        queue.append( (R(a), log+['R']) )
+        if a == 0:
+            queue.append( (S(a), log+['S']) )
+        
+        else:
+            queue.append( (D(a), log+['D']) )
+            queue.append( (S(a), log+['S']) )
+            queue.append( (L(a), log+['L']) )
+            queue.append( (R(a), log+['R']) )
             
