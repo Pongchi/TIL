@@ -16,25 +16,30 @@ def R(n):
     return (n % 10) * 1000 + n // 10
 
 T = int(sys.stdin.readline())
-
 for _ in range(T):
     A, B = map(int, sys.stdin.readline().split())
-    queue = deque([(A, [])])
-    visited = [1] * 10000
+    queue = deque([(A, '')])
+    visited = [0] * 10000
 
     while queue:
         a, log = queue.popleft()
         if a == B:
-            print("".join(log))
+            print(log)
             break
         
-        if visited[a]:
-            visited[a] = 0
-            if a == 0:
-                queue.append( (S(a), log+['S']) )
-            
-            else:
-                queue.append( (D(a), log+['D']) )
-                queue.append( (S(a), log+['S']) )
-                queue.append( (L(a), log+['L']) )
-                queue.append( (R(a), log+['R']) )
+        n = D(a)
+        if not visited[n]:
+            visited[n] = 1
+            queue.append( (n, log+'D') )
+        n = S(a)
+        if not visited[n]:
+            visited[n] = 1
+            queue.append( (n, log+'S') )
+        n = L(a)
+        if not visited[n]:
+            visited[n] = 1
+            queue.append( (n, log+'L') )
+        n = R(a)
+        if not visited[n]:
+            visited[n] = 1
+            queue.append( (n, log+'R') )
