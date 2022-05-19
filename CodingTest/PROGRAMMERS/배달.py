@@ -2,31 +2,29 @@
 
 import heapq
 
-def dijkstra(graph, start):
-    distances = {node: float('inf') for node in graph}
-    distances[start] = 0
+def solution(N, road, K):
+    graph = [ [] for _ in range(N+1) ]
+    distance = [float('inf')] * (N+1)
+    
+    for a, b, c in road:
+        graph[a].append( (b, c) )
+        graph[b].append( (a, c) )
+        
     queue = []
-    heapq.heappush(queue, [distances[start], start])
+    heapq.heappush(queue, (0, 1))
+    distance[1] = 0
     
     while queue:
-        current_distance, current_node = heapq.heappop(queue)
+        dist, now = heapq.heappop(queue)
         
-        if distances[current_node] < current_distance:
+        if distance[now] < dist:
             continue
         
-        for adjacent, weight in graph[current_node].items():
-            distance = current_distance + weight
-            if distance < distances[adjacent]:
-                distances[adjacent] = distance
-                heapq.heappush(queue, [distance, adjacent])
-        
-        return distances
-    
-def solution(N, road, K):
-    graph = {i:{} for i in range(1, N+1)}
-    for a, b, d in road:
-        graph[a][b] = d
-        graph[b][a] = d
-    
-    distance = dijkstra(graph, 1)
-    return len([ i for i in distance if distance[i] <= K ])
+        for i in graph[now]:
+            cost = dist + i[1]
+            
+            if cost < distance[i[0]]:
+                distance[i[0]] = cost
+                heapq.heappush(queue, (cost, i[0]))
+                
+    return len([ i for i in distance if i <= K ])
