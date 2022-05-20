@@ -2,18 +2,13 @@
 
 N, M = map(int, input().split())
 arr = list(map(int, input().split()))
+dp = [arr[0]]
 result = 0
 
-for i in range(N):
-    s = 0
-    for j in range(i, N):
-        if s+arr[j] == M:
-            result += 1
-            break
-        else:
-            s += arr[j]
-
-        if s > M:
-            break
+for i in arr[1:]:
+    dp.append( dp[-1] + i if dp[-1] < M else dp[-1])
+    if dp[-1] == M:
+        result += 1
 
 print( result )
+print(dp)
