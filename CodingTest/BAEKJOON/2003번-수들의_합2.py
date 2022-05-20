@@ -2,13 +2,15 @@
 
 N, M = map(int, input().split())
 arr = list(map(int, input().split()))
-dp = [arr[0]]
-result = 0
+s, result, end = 0, 0, 0
 
-for i in arr[1:]:
-    dp.append( dp[-1] + i if dp[-1] < M else dp[-1])
-    if dp[-1] == M:
+for start in range(N):
+    while s < M and end < N:
+        s += arr[end]
+        end += 1
+    
+    if s == M:
         result += 1
+    s -= arr[start]
 
 print( result )
-print(dp)

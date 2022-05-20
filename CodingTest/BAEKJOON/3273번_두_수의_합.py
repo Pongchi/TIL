@@ -5,15 +5,16 @@ arr = sorted(map(int, input().split()))
 x = int(input())
 result = 0
 
-for i in range(n-1):
-    if arr[i]+arr[i+1] > x:
-        break
-
+i = 0
+while i < n:
     for j in range(i+1, n):
         s = arr[i]+arr[j]
         if s == x:
             result += 1
         elif s > x:
+            i = j
             break
+
+    i += 1
 
 print( result )
