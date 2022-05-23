@@ -3,17 +3,18 @@
 n = int(input())
 arr = sorted(map(int, input().split()))
 x = int(input())
-result, end = 0, 1
+result, start, end = 0, 0, n-1
 
-for start in range(n-1):
-    while arr[start] + arr[end] < x and end < n-1:
-        end += 1
-
-    if start >= end:
-        break
-    if arr[start]+arr[end] == x:
+while start != end:
+    S = arr[start]+arr[end]
+    if S == x:
         result += 1
-        
-    end -= 1
+        start += 1
+
+    elif S > x:
+        end -= 1
+    
+    else:
+        start += 1
 
 print( result )
