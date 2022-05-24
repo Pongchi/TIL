@@ -2,7 +2,7 @@
 
 N = int(input())
 arr = sorted(map(int, input().split()))
-result = [arr[0], arr[1]] # [ A, B] = { A < B }
+result = [arr[0], arr[1]] # [ A, B ] = { A < B }
 left, right = 0, N-1
 
 while left < right:
