@@ -10,7 +10,7 @@ for _ in range(N):
 result = input()
 for _ in range(M-1):
     name = input()
-    if blood[result] < blood[name]:
+    if blood.get(name, 0.0) < blood.get(name, 0.0):
         result = name
 
 print( name )
