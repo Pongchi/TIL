@@ -22,18 +22,19 @@ def N_Queen(N):
             if x+i < N and 0 <= y-i:
                 MAP[x+i][y-i] += v
 
-    def recur(x, cnt):
+    def recur(x):
         nonlocal result
-        if cnt == 0:
-            result += 1
-            return
         for i in range(N):
             if MAP[x][i] == 0:
+                if x == N-1:
+                    result += 1
+                    return
+
                 fill(x, i, 1)
-                recur(x+1, cnt-1)
+                recur(x+1)
                 fill(x, i, -1)
 
-    recur(0, N)
+    recur(0)
     return result
 
 print( N_Queen(int(input())) )
