@@ -10,17 +10,12 @@ for _ in range(N-1):
     TREE[a].append(b)
     TREE[b].append(a)
 
-stack = [1]
-visted = [False] * (N+1)
-while stack:
-    n = stack.pop()
-    if not visted[n]:
-        stack.extend(TREE[n])
-
-        visted[n] = True
-        for i in TREE[n]:
-            if not answer[i]:
-                answer[i] = n
+q = [1]
+for v in q:
+    for ch in TREE[v]:
+        if not answer[ch]:
+            answer[ch] = v
+            q.append(ch)
 
 for i in range(2, N+1):
     print(answer[i])
