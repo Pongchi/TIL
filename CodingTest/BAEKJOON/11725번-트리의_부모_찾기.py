@@ -3,17 +3,21 @@
 import sys
 
 N = int(sys.stdin.readline())
-TREE = [ [] for _ in range(N+1) ]
+TREE = [ [] for _ in range(N+1)]
 answer = [0] * (N+1)
 for _ in range(N-1):
     a, b = sorted(map(int, sys.stdin.readline().split()))
-    if a == 1:
-        answer[b] = a
-    else:
-        if answer[a]:
-            answer[b] = a
-        else:
-            answer[a] = b
+    TREE[a].append(b)
+    TREE[b].append(a)
+
+stack = [1]
+while stack:
+    n = stack.pop()
+
+    for i in TREE[n]:
+        if not answer[i]:
+            answer[i] = n
+            stack.extend(TREE[n]) 
 
 for i in range(2, N+1):
     print(answer[i])
