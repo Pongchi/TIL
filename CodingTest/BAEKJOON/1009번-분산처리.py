@@ -2,6 +2,7 @@
 
 import sys
 
+
 for _ in range(int(sys.stdin.readline())):
     a, b = map(int, sys.stdin.readline().split())
-    print( (a**b) % 10 or 10)
+    print( pow(a, b) % 10 or 10)
