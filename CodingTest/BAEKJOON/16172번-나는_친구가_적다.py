@@ -9,6 +9,7 @@ while idx < len(S) and target < len(K):
         if S[idx] == K[target]:
             target += 1
         else:
+            idx -= target
             target = 0
     idx += 1
 
