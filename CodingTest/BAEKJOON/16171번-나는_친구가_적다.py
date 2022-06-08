@@ -9,7 +9,10 @@ while idx < len(S) and target < len(K):
         if S[idx] == K[target]:
             target += 1
         else:
+            idx -= target
             target = 0
     idx += 1
 
 print( 1 if target == len(K) else 0)
+
+# 반레 찾음. AAAB, AAB
