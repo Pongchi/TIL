@@ -18,7 +18,7 @@ while True:
     if n & 1:
         print("Goldbach's conjecture is wrong.")
     else:
-        for i in range(2, n):
+        for i in range(3, n, 2):
             if primes[i] and primes[n-i]:
                 print(f"{n} = {i} + {n-i}")
                 break
