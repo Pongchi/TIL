@@ -9,7 +9,7 @@ def find_max_square(n):
 
     for row in range(N-n+1):
         for i in range(M-n+1):
-            if MAP[row][i] == MAP[row+n-1][i+n-1]:
+            if MAP[row][i] == MAP[row][i+n-1] == MAP[row+n-1][i] == MAP[row+n-1][i+n-1]:
                 return n**2
 
     return find_max_square(n-1)
