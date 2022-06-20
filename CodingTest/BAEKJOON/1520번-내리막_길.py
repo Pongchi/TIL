@@ -1,22 +1,29 @@
 # 문제 주소 : https://www.acmicpc.net/problem/1520
 
+import sys
+
+sys.setrecursionlimit(10**6)
+
 vx = [1, -1, 0, 0]
 vy = [0, 0, 1, -1]
 
-M, N = map(int, input().split())
-MAP = [ list(map(int, input().split())) for _ in range(M) ]
-stack = [(0, 0)]
-result = 0
+M, N = map(int, sys.stdin.readline().split())
+MAP = [ list(map(int, sys.stdin.readline().split())) for _ in range(M) ]
+dp = [ [-1]*N for _ in range(M) ]
 
-while stack:
-    x, y = stack.pop()
+def dfs(x, y):
+    if dp[x][y] != -1:
+        return dp[x][y]
+
     if x == M-1 and y == N-1:
-        result += 1
-        continue
+        return 1
     
+    dp[x][y] = 0
     for i in range(4):
         nx, ny = x+vx[i], y+vy[i]
         if 0 <= nx < M and 0 <= ny < N and MAP[x][y] > MAP[nx][ny]:
-            stack.append((nx, ny))
+            dp[x][y] += dfs(nx, ny)
 
-print(result)
+    return dp[x][y]
+
+print(dfs(0, 0))
