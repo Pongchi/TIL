@@ -2,6 +2,6 @@
 
 N = int(input())
 arr = list(map(int, input().split()))
-A = { v:i for i, v in enumerate(sorted(arr)) }
+A = sorted(enumerate(sorted(arr)), key=lambda x : x[0])
 
-print(*[ A[i] for i in arr])
+print(*[ A[i-1][0] for i in arr])
