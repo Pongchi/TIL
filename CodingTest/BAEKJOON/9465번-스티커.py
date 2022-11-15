@@ -1,14 +1,15 @@
 # 문제 주소 : https://www.acmicpc.net/problem/9465
 
-def dp(score, loc):
-    if loc[1] > n-1:
-        return score
-
-    score += stamps[loc[0]][loc[1]]
-    return max( dp(score, (0 if loc[0] else 0, loc[1]+1)),  dp(score, (0, loc[1]+2)), dp(score, (1, loc[1]+2)) )
-
 for T in range(int(input())):
     n = int(input())
     stamps = [ list(map(int, input().split())), list(map(int, input().split())) ]
+    dp = [ [0] * n for _ in range(2) ]
+    dp[0][0], dp[1][0] = stamps[0][0], stamps[1][0]
+    if n >= 2:
+        dp[0][1], dp[1][1] = dp[1][0]+stamps[0][1], dp[0][0]+stamps[1][1]
 
-    print("정답 :", max( dp(0, (0,0)), dp(0, (1, 0)) ))
+    for i in range(2, n):
+        dp[0][i] = max( dp[1][i-1], dp[0][i-2], dp[1][i-2] ) + stamps[0][i]
+        dp[1][i] = max( dp[0][i-1], dp[0][i-2], dp[1][i-2] ) + stamps[1][i]
+
+    print(max(dp[0][-1], dp[1][-1]))
