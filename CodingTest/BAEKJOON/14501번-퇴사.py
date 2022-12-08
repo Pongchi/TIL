@@ -9,15 +9,18 @@ for i in range(N):
     T[i], P[i] = map(int, sys.stdin.readline().split())
 
 dp = [0] * N
-queue = deque([ (i, P[i]) for i in range(N) if T[i]+i < N ])
+queue = deque([ (0, 0) ])
 while queue:
     days, propit = queue.popleft()
     if days+T[days] < N:
         dp[days] = max(propit+P[days], dp[days])
-        for i in range(N-days-T[days]):
-            if dp[days+T[days]+i] < dp[days]:
-                dp[days+T[days]+i] = dp[days]
-                queue.append((days+T[days]+i, dp[days]))
+        queue.append((days+T[days], dp[days]))
+    
+    for i in range(1, T[days]):
+        if days+i < N:
+            queue.append((days+i, dp[days]))
+        else:
+            break
 
 print( dp[-1] )
 print(dp)
